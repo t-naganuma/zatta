@@ -4,6 +4,8 @@ import { CSS } from "@dnd-kit/utilities";
 type Props = {
   id: string;
   options: { value: string; label: string }[];
+  selectValue: string;
+  handleChange: (name: string, value: string) => void;
 };
 
 export const SortableItem = (props: Props) => {
@@ -32,7 +34,13 @@ export const SortableItem = (props: Props) => {
           {...attributes}
           {...listeners}
         />
-        <select name="example" id="example" className="select">
+        <select
+          name="example"
+          id="example"
+          className="select"
+          value={props.selectValue}
+          onChange={(e) => props.handleChange(props.id, e.target.value)}
+        >
           {props.options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
